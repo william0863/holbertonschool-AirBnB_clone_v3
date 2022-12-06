@@ -3,6 +3,8 @@
 
 
 from flask import Flask
+from flask import make_response
+from flask import jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv as get
@@ -22,6 +24,12 @@ def teardown_appcontext(self):
     storage.close()
     """
     storage.close()
+
+
+@app.errorhandler(404)
+def error_404(error):
+    dict_error = {"error": "Not found"}
+    return make_response(jsonify(dict_error), 404)
 
 
 if __name__ == "__main__":
