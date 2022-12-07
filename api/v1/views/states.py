@@ -4,7 +4,11 @@ from api.v1.views import app_views
 from models import storage
 from flask import jsonify, abort, request
 from models.state import State # To retrieve the list of all State objects: GET /api/v1/states
+
+
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
+
+
 def states_ret():
     """return json State objects"""
     # return json State objects
@@ -13,6 +17,8 @@ def states_ret():
     for obj in all_objs.values():
         state_list.append(obj.to_dict())
     return jsonify(state_list)@app_views.route('/states/<state_id>', methods=["GET"])
+
+
 def get_by_id(state_id):
     """return json State objects by id"""
     # return json State objects by id
@@ -21,6 +27,8 @@ def get_by_id(state_id):
         abort(404)
     else:
         return jsonify(obj.to_dict())@app_views.route('/states/<state_id>', methods=["DELETE"])
+
+
 def state_delete(state_id=None):
     """delete an object by id"""
     # delete an object by id
@@ -30,6 +38,8 @@ def state_delete(state_id=None):
     storage.delete(obj)
     storage.save()
     return jsonify({}), 200@app_views.route('/states/', methods=["POST"])
+
+
 def post_obj():
     """add new state object"""
     # add new state object
@@ -45,6 +55,8 @@ def post_obj():
     storage.new(new_state)
     storage.save()
     return jsonify(new_state.to_dict()), 201@app_views.route('/states/<state_id>', methods=["PUT"])
+
+    
 def update_obj(state_id=None):
     """update new state object"""
     # update new state object
