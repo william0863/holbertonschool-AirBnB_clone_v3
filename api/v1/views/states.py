@@ -3,7 +3,7 @@
 from api.v1.views import app_views
 from models import storage
 from flask import jsonify, abort, request
-from models.state import State# Retrieves the list of all State objects: GET /api/v1/states
+from models.state import State # To retrieve the list of all State objects: GET /api/v1/states
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
 def states_ret():
     """return json State objects"""
