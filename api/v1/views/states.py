@@ -63,7 +63,7 @@ def update_obj(state_id=None):
     dic = {}
     obj = storage.get("State", state_id)
     if obj is None:
-        abort(404)
+        abort(400)
     dic = request.get_json(silent=True)
     if dic is None:
         abort(400, "Not a JSON")
