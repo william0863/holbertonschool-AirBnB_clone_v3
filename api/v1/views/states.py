@@ -40,7 +40,7 @@ def state_delete(state_id=None):
     return jsonify({}), 200
 
 
-@app_views.route('/states/', methods=["POST"])
+@app_views.route('/states/', methods=["POST"], strict_slashes=False)
 def post_obj():
     """add new state object"""
     dic = {}
