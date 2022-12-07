@@ -7,6 +7,7 @@ from models.state import State# Retrieves the list of all State objects: GET /ap
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
 def states_ret():
     """return json State objects"""
+    # return json State objects
     state_list = []
     all_objs = storage.all(State)
     for obj in all_objs.values():
@@ -14,6 +15,7 @@ def states_ret():
     return jsonify(state_list)@app_views.route('/states/<state_id>', methods=["GET"])
 def get_by_id(state_id):
     """return json State objects by id"""
+    # return json State objects by id
     obj = storage.get("State", state_id)
     if obj is None:
         abort(404)
@@ -21,6 +23,7 @@ def get_by_id(state_id):
         return jsonify(obj.to_dict())@app_views.route('/states/<state_id>', methods=["DELETE"])
 def state_delete(state_id=None):
     """delete an object by id"""
+    # delete an object by id
     obj = storage.get("State", state_id)
     if obj is None:
         abort(404)
@@ -29,6 +32,7 @@ def state_delete(state_id=None):
     return jsonify({}), 200@app_views.route('/states/', methods=["POST"])
 def post_obj():
     """add new state object"""
+    # add new state object
     dic = {}
     dic = request.get_json(silent=True)
     if dic is None:
@@ -43,6 +47,7 @@ def post_obj():
     return jsonify(new_state.to_dict()), 201@app_views.route('/states/<state_id>', methods=["PUT"])
 def update_obj(state_id=None):
     """update new state object"""
+    # update new state object
     dic = {}
     obj = storage.get("State", state_id)
     if obj is None:
