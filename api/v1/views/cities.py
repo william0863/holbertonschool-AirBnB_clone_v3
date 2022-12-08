@@ -10,7 +10,7 @@ from models.city import City
 
 @app_views.route('/states/<state_id>/cities', methods=["GET"],
                  strict_slashes=False)
-def get_all_cities(state_id=None):
+def get_all_cities(state_id):
     """return all cities objects"""
     state_list = []
     all_objs = storage.all(State)
@@ -23,7 +23,7 @@ def get_all_cities(state_id=None):
 
 
 @app_views.route('/states/<city_id>', methods=["GET"])
-def get_city(city_id=None):
+def get_city(city_id):
     """return json City object"""
     obj = storage.get("City", city_id)
     if obj is None:
@@ -33,7 +33,7 @@ def get_city(city_id=None):
 
 
 @app_views.route('/cities/<city_id>', methods=["DELETE"])
-def city_delete(city_id=None):
+def city_delete(city_id):
     """delete an object by id"""
     obj = storage.get("City", city_id)
     if obj is None:
@@ -61,7 +61,7 @@ def post_obj_city():
 
 
 @app_views.route('/cities/<city_id>', methods=["PUT"], strict_slashes=False)
-def update_obj_city(city_id=None):
+def update_obj_city(city_id):
     """update new state object"""
     dic = {}
     obj = storage.get("City", city_id)
