@@ -14,18 +14,18 @@ def get_all_cities(state_id):
     """return all cities objects"""
     state_list = []
     all_objs = storage.all(State)
-    obj = storage.get("State", state_id)
-    for obj in all_objs.values():
-        state_list.append(obj.to_dict())
+    obj = storage.get(State, state_id)
     if obj is None:
         abort(404)
+    for obj in all_objs.values():
+        state_list.append(obj.to_dict())
     return jsonify(state_list)
 
 
 @app_views.route('/states/<city_id>', methods=["GET"])
 def get_city(city_id):
     """return json City object"""
-    obj = storage.get("City", city_id)
+    obj = storage.get(City, city_id)
     if obj is None:
         abort(404)
     else:
@@ -35,7 +35,7 @@ def get_city(city_id):
 @app_views.route('/cities/<city_id>', methods=["DELETE"])
 def city_delete(city_id):
     """delete an object by id"""
-    obj = storage.get("City", city_id)
+    obj = storage.get(City, city_id)
     if obj is None:
         abort(404)
     storage.delete(obj)
@@ -64,7 +64,7 @@ def post_obj_city():
 def update_obj_city(city_id):
     """update new state object"""
     dic = {}
-    obj = storage.get("City", city_id)
+    obj = storage.get(City, city_id)
     if obj is None:
         abort(404)
     dic = request.get_json(silent=True)
