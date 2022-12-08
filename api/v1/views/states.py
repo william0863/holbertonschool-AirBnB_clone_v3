@@ -49,7 +49,7 @@ def post_obj():
         abort(400, "Not a JSON")
     if "name" not in dic.keys():
         abort(400, "Missing name")
-    new_state = storage.all(State)
+    new_state = State(**dic)
     for k, v in dic.items():
         setattr(new_state, k, v)
     storage.new(new_state)
