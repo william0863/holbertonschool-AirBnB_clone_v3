@@ -43,7 +43,7 @@ def city_delete(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states/', methods=["POST"], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=["POST"], strict_slashes=False)
 def post_obj_city():
     """add new state object"""
     dic = {}
@@ -52,7 +52,7 @@ def post_obj_city():
         abort(400, "Not a JSON")
     if "name" not in dic.keys():
         abort(400, "Missing name")
-    new_state = storage.all(City)
+    new_state = City(**dic)
     for k, v in dic.items():
         setattr(new_state, k, v)
     storage.new(new_state)
