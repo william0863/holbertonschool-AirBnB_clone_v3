@@ -19,7 +19,7 @@ def all_reviews(place_id=None):
     n_reviews = [review.to_dict() for review in n_place.reviews]
     return jsonify(n_reviews)
 
-  
+
 # Get a review
 @app_views.route('/reviews/<review_id>/', methods=['GET'],
                  strict_slashes=False)
@@ -29,7 +29,7 @@ def show_one_review(review_id):
         abort(404)
     return jsonify(n_review.to_dict())
 
-  
+
 # Delete a review
 @app_views.route('/reviews/<review_id>/', methods=['DELETE'],
                  strict_slashes=False)
@@ -41,7 +41,7 @@ def delete_review(review_id):
     storage.save()
     return jsonify({}), 200
 
-  
+
 # Create a new review
 @app_views.route('/places/<place_id>/reviews/', methods=['POST'],
                  strict_slashes=False)
@@ -64,7 +64,7 @@ def create_review(place_id):
     reviews.save()
     return jsonify(reviews.to_dict()), 201
 
-  
+
 # Update an existing review
 @app_views.route('/reviews/<review_id>/', methods=['PUT'],
                  strict_slashes=False)
