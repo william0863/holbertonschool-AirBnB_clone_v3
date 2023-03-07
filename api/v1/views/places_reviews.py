@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-""" Module API for Places Review"""
 from api.v1.views import app_views
 from flask import jsonify
 from flask import abort, request
@@ -8,35 +7,29 @@ from models.review import Review
 from models.place import Place
 from models.user import User
 
-
-# Retrieves the list of all Review objects of a Place:
+# Get all reviews
 @app_views.route('/places/<place_id>/reviews/', methods=['GET'],
                  strict_slashes=False)
 def all_reviews(place_id=None):
-    """ List all Reviews """
     n_place = storage.get(Place, place_id)
     if n_place is None:
         abort(404)
     n_reviews = [review.to_dict() for review in n_place.reviews]
     return jsonify(n_reviews)
 
-
-# Retrieves a Review object. : GET /api/v1/reviews/<review_id>
+# Get a review
 @app_views.route('/reviews/<review_id>/', methods=['GET'],
                  strict_slashes=False)
 def show_one_review(review_id):
-    """ show review """
     n_review = storage.get(Review, review_id)
     if n_review is None:
         abort(404)
     return jsonify(n_review.to_dict())
 
-
-# Deletes a Review object: DELETE /api/v1/reviews/<review_id>
+# Delete a review
 @app_views.route('/reviews/<review_id>/', methods=['DELETE'],
                  strict_slashes=False)
 def delete_review(review_id):
-    """ Delete Review """
     n_review = storage.get(Review, review_id)
     if n_review is None:
         abort(404)
@@ -44,12 +37,10 @@ def delete_review(review_id):
     storage.save()
     return jsonify({}), 200
 
-
-# Creates a Review: POST /api/v1/places/<place_id>/reviews
+# Create a new review
 @app_views.route('/places/<place_id>/reviews/', methods=['POST'],
                  strict_slashes=False)
 def create_review(place_id):
-    """ Create New Review """
     opc_reqst = request.get_json()
     if opc_reqst is None:
         return 'Not a JSON', 400
@@ -68,12 +59,10 @@ def create_review(place_id):
     reviews.save()
     return jsonify(reviews.to_dict()), 201
 
-
-# Updates a Review object: PUT /api/v1/reviews/<review_id>
+# Update an existing review
 @app_views.route('/reviews/<review_id>/', methods=['PUT'],
                  strict_slashes=False)
 def update_review(review_id):
-    """ Update Review """
     n_review = storage.get(Review, review_id)
     if n_review is None:
         abort(404)
