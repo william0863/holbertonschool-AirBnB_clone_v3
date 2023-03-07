@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""API to manage Places Review"""
 from api.v1.views import app_views
 from flask import jsonify
 from flask import abort, request
